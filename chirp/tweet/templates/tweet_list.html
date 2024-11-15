@@ -9,21 +9,38 @@
     <div class="card" style="width: 18rem;">
         {% if tweet.photo %}
             <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet photo">
+        {% endif %}
             <div class="card-body">
               <h5 class="card-title">{{tweet.user.username}}</h5>
               <p class="card-text">{{tweet.text}}</p>
               <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
-              <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+              <button  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
             </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteModalLabel">Delete tweet</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          {% else %}
-          <div class="card-body">
-              <h5 class="card-title">{{tweet.user.username}}</h5>
-              <p class="card-text">{{tweet.text}}</p>
-              <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
-              <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
-            </div>
-        {% endif %}
+          <div class="modal-body">
+            <p>
+                Are you sure you want to delete this tweet?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="{% url 'tweet_delete' tweet.id %}"  class="btn btn-danger">confirm</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
     {% endfor %}
 </div>
+
+
+
 {% endblock %}
