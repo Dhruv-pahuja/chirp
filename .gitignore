@@ -1,3 +1,5 @@
 .venv
 
 chirp/media/tweet_photos
+
+db.sqlite3
