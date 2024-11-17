@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from .models import Tweet
-from .forms import TweetForm,UserRegistrationForm
+from .forms import TweetForm,UserRegistrationForm,CustomLoginForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login ,logout
+from django.contrib.auth import login 
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 def index(request):
@@ -61,3 +62,7 @@ def register(request):
         form = UserRegistrationForm()
 
     return render(request, 'registration/register.html',{'form':form})
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomLoginForm
+    template_name = 'registration/login.html'
